@@ -661,10 +661,10 @@
   function focusExtendedSelector(selector, direction) {
     if (selector.charAt(0) == '@') {
       if (selector.length == 1) {
-        return focusSection();
+        return focusSection(null, direction);
       } else {
         var sectionId = selector.substr(1);
-        return focusSection(sectionId);
+        return focusSection(sectionId, direction);
       }
     } else {
       var next = parseSelector(selector)[0];
@@ -678,7 +678,7 @@
     return false;
   }
 
-  function focusSection(sectionId) {
+  function focusSection(sectionId, direction) {
     var range = [];
     var addRange = function(id) {
       if (id && range.indexOf(id) < 0 &&
@@ -704,9 +704,23 @@
                getSectionDefaultElement(id) ||
                getSectionNavigableElements(id)[0];
       } else {
-        next = getSectionDefaultElement(id) ||
-               getSectionLastFocusedElement(id) ||
-               getSectionNavigableElements(id)[0];
+
+        next = getSectionDefaultElement(id);
+
+        if (!next) {
+          var currentFocusedElement = getCurrentFocusedElement()
+          if (direction && currentFocusedElement) {
+            var config = extend({}, GlobalConfig, _sections[id]);
+            next = navigate(
+                currentFocusedElement,
+                direction,
+                getSectionNavigableElements(id),
+                config
+            );
+          } else {
+            next = getSectionNavigableElements(id)[0];
+          }
+        }
       }
 
       if (next) {
@@ -873,7 +887,7 @@
         currentFocusedElement = getSectionLastFocusedElement(_lastSectionId);
       }
       if (!currentFocusedElement) {
-        focusSection();
+        focusSection(null, direction);
         return preventDefault();
       }
     }
