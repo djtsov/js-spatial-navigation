@@ -976,6 +976,11 @@
   /* Public Function */
   /*******************/
   var SpatialNavigation = {
+
+    getSections: function() {
+        return _sections;
+    },
+
     init: function() {
       if (!_ready) {
         window.addEventListener('keydown', onKeyDown);
