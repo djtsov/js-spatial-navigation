@@ -719,6 +719,10 @@
             );
           } else {
             next = getSectionNavigableElements(id)[0];
+            // prevent duplicate focus
+            if (currentFocusedElement && currentFocusedElement==next) {
+              return false;
+            }
           }
         }
       }
