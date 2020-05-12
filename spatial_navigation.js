@@ -695,6 +695,8 @@
       Object.keys(_sections).map(addRange);
     }
 
+    var currentFocusedElement = getCurrentFocusedElement();
+
     for (var i = 0; i < range.length; i++) {
       var id = range[i];
       var next;
@@ -708,7 +710,6 @@
         next = getSectionDefaultElement(id);
 
         if (!next) {
-          var currentFocusedElement = getCurrentFocusedElement()
           if (direction && currentFocusedElement) {
             var config = extend({}, GlobalConfig, _sections[id]);
             next = navigate(
@@ -719,12 +720,13 @@
             );
           } else {
             next = getSectionNavigableElements(id)[0];
-            // prevent duplicate focus
-            if (currentFocusedElement && currentFocusedElement==next) {
-              return false;
-            }
           }
         }
+      }
+
+      // prevent duplicate focus
+      if (next && currentFocusedElement && currentFocusedElement==next) {
+        return false;
       }
 
       if (next) {
