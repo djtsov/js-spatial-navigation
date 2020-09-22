@@ -32,7 +32,8 @@
     restrict: 'self-first', // 'self-first', 'self-only', 'none'
     tabIndexIgnoreList:
       'a, input, select, textarea, button, iframe, [contentEditable=true]',
-    navigableFilter: null
+    navigableFilter: null,
+    focusDelay: 0,
   };
 
   /*********************/
@@ -639,7 +640,10 @@
       _duringFocusChange = false;
       return false;
     }
-    elem.focus();
+    setTimeout( () => {
+      elem.focus();
+    }, _sections[sectionId].focusDelay);
+
     fireEvent(elem, 'focused', focusProperties, false);
 
     _duringFocusChange = false;
