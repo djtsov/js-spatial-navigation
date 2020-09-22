@@ -640,7 +640,7 @@
       _duringFocusChange = false;
       return false;
     }
-    setTimeout( () => {
+    setTimeout( function() {
       elem.focus();
     }, _sections[sectionId].focusDelay);
 
