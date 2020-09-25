@@ -8,12 +8,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/djtsov/js-spatial-navigation.git"
+    "url": "bitbucket:tvmucho/js-spatial-navigation"
   },
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/djtsov/js-spatial-navigation/issues"
-  },
-  "homepage": "https://github.com/djtsov/js-spatial-navigation#readme"
 }
