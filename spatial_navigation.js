@@ -991,6 +991,17 @@
         return _sections;
     },
 
+    reorderSections: function(sectionId) {
+      let section = _sections[sectionId]
+      delete _sections[sectionId];
+      let sections = {[sectionId]: section}
+      for (const [key, value] of Object.entries(_sections)) {
+         sections[key] = value;
+      }
+      _sections = sections;
+      return _sections;
+    },
+
     init: function() {
       if (!_ready) {
         window.addEventListener('keydown', onKeyDown);
