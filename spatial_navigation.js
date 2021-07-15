@@ -991,14 +991,6 @@
         return _sections;
     },
 
-    reorderSections: function(sectionId) {
-      let section = _sections[sectionId]
-      delete _sections[sectionId];
-      _sections = Object.assign({[sectionId]: section, ..._sections});
-      return _sections;
-    },
-
-
     init: function() {
       if (!_ready) {
         window.addEventListener('keydown', onKeyDown);
